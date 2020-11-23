@@ -1,0 +1,41 @@
+{% extends 'Base/Base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+    <title>Update Profile</title>
+{% endblock title %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand font-weight-bold" href="{% url 'homepage' %}">
+            <i class="fas fa-phone-square-alt fa-lg"></i> SmartphoneWorld.in
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link px-3 active" href="{% url 'homepage' %}"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3 active" href="{% url 'logoutuser' %}"><i class="fas fa-sign-out-alt"></i>
+                        Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock navbar %}
+
+{% block content %}
+    <div class="container card card-header mt-5"><h1 style="font-family: Roboto">Update Profile</h1></div>
+    <div class="container card card-body">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'updateprofile' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+{% endblock content %}

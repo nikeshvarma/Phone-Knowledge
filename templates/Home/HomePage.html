@@ -1,0 +1,205 @@
+{% extends 'Base/Base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home | SmartphoneWorld.in</title>
+{% endblock title %}
+
+
+{% block content %}
+    <!-- Page Content -->
+
+    {% if messages %}
+        <div class="system-message" align="center">
+            {% for message in messages %}
+                <h6 class="alert alert-danger">{{ message }}</h6>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-8" style="border: 2px solid orangered;">
+                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        {% for image in carouse_images %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                <img id="carousel" class="d-block img-fluid" src="{{ image.image.url }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card card-body h-100">
+                    <h5 class="alert alert-dark text-info w-100 p-3">UPCOMING SMARTPHONES - </h5>
+                    <div>
+                        <marquee behavior="scroll" direction="up" height="380" scrollamount="2">
+                            {% for phone in upcoming_phones %}
+                                <p><strong>{{ phone.name }}</strong>{{ ' - ' }}{{ phone.short_description }}</p>
+                                <hr>
+                            {% endfor %}
+                        </marquee>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mt-5">
+                <div class="row">
+                    <div class="card card-header w-100">
+                        <h3 class="w-100">Latest News - <a class="float-right" href="#"><h6>More News</h6></a></h3>
+                    </div>
+                    <div class="card-deck">
+                        {% for news in newses %}
+                            <a class="card phone_box nounderline" href="{% url 'news_page' news.datetime %}">
+                                <img class="card-img-top mt-4"
+                                     style="max-height: 200px; width: 150px; margin-left: auto; margin-right: auto;"
+                                     src="{{ news.image.url }}">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ news.title }}</h6>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">updated at {{ news.datetime }}</small>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                <h3 class="card card-header bg-dark text-white mt-3">Latest Smartphones - </h3>
+
+                {% for phone in mobiles %}
+                    <div class="row p-3" id="content" style="font-family: sans-serif;">
+                        <div class="filter_img">
+                            <a href="{% url 'details_page' phone.id %}">
+                                <img class="img-fluid" src="{{ phone.home_page_photo.url }}"
+                                     style="height: 160px; margin-top: 30px; margin-right: 10px">
+                            </a>
+                        </div>
+                        <div class="ml-auto mr-auto row w-75">
+                            <div class="w-100">
+                                <a class="text-dark" href="{% url 'details_page' phone.id %}">
+                                    <h5 class="float-left phone_screen">{{ phone.phone_name }}</h5>
+                                </a>
+                                <h5 class="float-right text-danger phone_screen">
+                                    Starting Price &#8377; {{ phone.starting_price }}</h5>
+                            </div>
+                            <div class="row card card-body bg-light h-75">
+                                <table cellpadding="1" cellspacing="1">
+                                    <tbody class="text-center">
+                                    <tr>
+                                        <th><i class="fas fa-tachometer-alt"></i> Performance</th>
+                                        <th><i class="fas fa-camera"></i> Camera</th>
+                                        <th><i class="fas fa-mobile-alt"></i> Display</th>
+                                        <th><i class="fas fa-battery-full"></i> Battery</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="small">
+                                            {{ phone.processor }}<br>
+                                            {{ phone.RAM_Type }} RAM<br>
+                                            {{ phone.storage_type }} Storage
+                                        </td>
+                                        <td class="small">
+                                            {{ phone.back_camera_setup }}<br>
+                                            {{ phone.front_camera_setup }}
+                                        </td>
+                                        <td class="small">
+                                            {{ phone.display_size }} Inch<br>
+                                            {{ phone.display_type }}<br>
+                                            {{ phone.display_refresh_rate }} Hz
+                                        </td>
+                                        <td class="small">
+                                            {{ phone.battery_capacity }} mAh<br>
+                                            {{ phone.battery_type }}<br>
+                                            {{ phone.charging_port }} Port
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Search Phone</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="phone_search" placeholder="Enter Phone Name..."
+                               autofocus>
+                        <div class="results" id="result">
+                            {% include 'Home/Search.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="modal fade" id="compareModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+                <!-- Modal content-->
+                <form id="compareForm" method="GET" action="{% url 'comparison' %}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Compare Phone</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="">Select Phones</span>
+                                </div>
+                                <input type="text" class="phone_compare form-control" value="{{ phone.phone_name }}"
+                                       list="phones" name="first" placeholder="Select Phone">
+                                <input type="search" class="phone_compare form-control" placeholder="Select Phone"
+                                       list="phones" name="second" autofocus>
+                            </div>
+                            <div class="results" id="result">
+                                {% include 'Home/CompareList.html' %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="input-group-append btn btn-success">Compare</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; SmartphoneWorld.in 2020</p>
+        </div>
+    </footer>
+{% endblock content %}

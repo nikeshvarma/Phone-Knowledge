@@ -1,0 +1,75 @@
+{% extends 'Base/Base.html' %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand font-weight-bold" href="{% url 'homepage' %}">
+            <i class="fas fa-phone-square-alt fa-lg"></i> SmartphoneWorld.in
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" href="{% url 'homepage' %}"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" href="{% url 'updateprofile' %}"><i class="fas fa-id-card"></i>
+                            Update
+                            Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" href="{% url 'logoutuser' %}"><i
+                                class="fas fa-sign-out-alt"></i>
+                            Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link px-3 active" href="{% url 'homepage' %}"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" href="{% url 'signupuser' %}"><i class="fas fa-user-plus"></i>
+                            Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 active" href="{% url 'loginuser' %}"><i class="fas fa-sign-in-alt"></i>
+                            Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+{% endblock navbar %}
+
+{% block content %}
+
+    <div class="container bg-secondary text-white pb-5">
+        <div class="box">
+            <hr>
+            <h1 class="card card-header">Profile</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-3 image">
+                    <img class="rounded img-fluid card card-img" src="{{ profile.profile_picture.url }}" alt="profile_picture"
+                         height="320" width="275">
+                </div>
+
+                <div col-md-1 style="padding: 20px;"></div>
+
+                <div class="col-md-6 image card card-body bg-secondary">
+                    <h3 class="my-3">{{ profile.name }}</h3>
+                    <h6 class="userprofile"><strong>Username: </strong>{{ user.username }}</h6>
+                    <h6 class="userprofile"><strong>Email: </strong>{{ user.email }}</h6>
+                    <h6 class="userprofile"><strong>Phone Number: </strong>{{ profile.phone_number }}</h6>
+                    <h6 class="userprofile"><strong>Address: </strong>{{ profile.address }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /.row -->
+
+{% endblock content %}

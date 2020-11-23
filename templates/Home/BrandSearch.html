@@ -1,0 +1,6 @@
+hello
+{% for cmp in company %}
+    <input class="{{ cmp.cls }}" id="p{{ cmp.pk }}" type="checkbox"
+           name="{{ cmp.name }}" value="{{ cmp.value }}">
+    <label for="p{{ cmp.pk }}" class="w-50">{{ cmp.label }}</label><br>
+{% endfor %}

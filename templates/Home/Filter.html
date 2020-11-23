@@ -1,0 +1,127 @@
+{% extends 'Base/Base.html' %}
+
+{% block title %}
+    <title>Filter Phones</title>
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="row mt-5">
+                    <div class="border border-dark p-2 text-center" id="checkbox-container">
+
+                        <!-- form started -->
+                        <form id="filter_form" method="GET" action="{% url 'main_filter' %}">
+                            <h3 class="card card-title" style="font-family: Consolas;">FILTER RESULT</h3>
+
+                            <div class="btn btn-group w-100 mb-3">
+                                <button class="btn btn-outline-warning" type="reset">Reset</button>
+                                <button class="btn btn-outline-primary" type="submit">Apply</button>
+                            </div>
+
+                            <div class="list-group-item text-danger text-center bg-dark">BRAND</div>
+                            <div class="list-group-item">
+                                <input type="search" id="search_brand" class="form-control" placeholder="Search Brand">
+                            </div>
+
+                            <div class="overflow-filter" id="brands">
+                                <div id="include_brand_search"
+                                     class="d-none">{% include 'Home/BrandSearch.html' %}</div>
+                                {% for brnd in brands %}
+                                    <input class="{{ brnd.cls }}" id="b{{ brnd.pk }}" type="checkbox"
+                                           name="{{ brnd.name }}" value="{{ brnd.value }}">
+                                    <label for="b{{ brnd.pk }}" class="w-50">{{ brnd.brands }}</label><br>
+                                {% endfor %}
+                            </div>
+
+                            <div class="list-group-item text-danger text-center bg-dark">PRICE</div>
+                            <div class="overflow-filter">
+                                {% for brnd in price %}
+                                    <input class="{{ brnd.cls }}" id="p{{ brnd.pk }}" type="checkbox"
+                                           name="{{ brnd.name }}"
+                                           value="{{ brnd.min_value }}{{ '.' }}{{ brnd.max_value }}">
+                                    <label for="p{{ brnd.pk }}" class="w-50">{{ brnd.label }}</label><br>
+                                {% endfor %}
+                            </div>
+
+                            <div class="list-group-item text-danger text-center bg-dark">RAM</div>
+                            <div id="ram_filter" class="overflow-filter">
+                                {% for rm in ram %}
+                                    <input class="{{ rm.cls }}" id="r{{ rm.pk }}" type="checkbox"
+                                           name="{{ rm.name }}" value="{{ rm.value }}">
+                                    <label for="r{{ rm.pk }}" class="w-50">{{ rm.RAM }} GB</label><br>
+                                {% endfor %}
+                            </div>
+                        </form>
+                        <!-- form end -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-5">
+                {% include 'Home/PhoneFilter.html' %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Search Phone</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="phone_search" placeholder="Enter Phone Name..."
+                               autofocus>
+                        <div class="results" id="result">
+                            {% include 'Home/Search.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="modal fade" id="compareModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+                <!-- Modal content-->
+                <form id="compareForm" method="GET" action="{% url 'comparison' %}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Compare Phone</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="">Select Phones</span>
+                                </div>
+                                <input type="text" class="phone_compare form-control" value="{{ phone.phone_name }}"
+                                       list="phones" name="first" placeholder="Select Phone">
+                                <input type="search" class="phone_compare form-control" placeholder="Select Phone"
+                                       list="phones" name="second" autofocus>
+                            </div>
+                            <div class="results" id="result">
+                                {% include 'Home/CompareList.html' %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="input-group-append btn btn-success">Compare</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

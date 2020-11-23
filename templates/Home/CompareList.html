@@ -1,0 +1,7 @@
+{% if phones.count > 0 %}
+<datalist id="phones">
+    {% for phone in phones %}
+    <option>{{ phone.phone_name }}</option>
+    {% endfor %}
+</datalist>
+{% endif %}

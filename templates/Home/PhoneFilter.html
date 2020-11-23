@@ -1,0 +1,52 @@
+{% for phone in phones %}
+    <div class="row p-3" id="content">
+        <div class="filter_img">
+            <a href="{% url 'details_page' phone.id %}">
+                <img class="img-fluid" src="{{ phone.home_page_photo.url }}" style="height: 180px;">
+            </a>
+        </div>
+        <div class="ml-5 row w-75">
+            <div class="w-100">
+                <a href="{% url 'details_page' phone.id %}">
+                    <h4 class="float-left phone_screen">{{ phone.phone_name }}</h4>
+                </a>
+                <h4 class="float-right text-danger phone_screen">
+                    &#8377; {{ phone.starting_price }}</h4>
+            </div>
+            <div class="row card card-body bg-light w-100 h-75">
+                <table>
+                    <tbody class="text-center">
+                    <tr>
+                        <th><i class="fas fa-tachometer-alt"></i> Performance</th>
+                        <th><i class="fas fa-camera"></i> Camera</th>
+                        <th><i class="fas fa-mobile-alt"></i> Display</th>
+                        <th><i class="fas fa-battery-full"></i> Battery</th>
+                    </tr>
+                    <tr>
+                        <td class="small">
+                            {{ phone.processor }}<br>
+                            {{ phone.RAM_Type }} RAM<br>
+                            {{ phone.storage_type }} Storage
+                        </td>
+                        <td class="small">
+                            {{ phone.back_camera_setup }}<br>
+                            {{ phone.front_camera_setup }}
+                        </td>
+                        <td class="small">
+                            {{ phone.display_size }} Inch<br>
+                            {{ phone.display_type }}<br>
+                            {{ phone.display_refresh_rate }} Hz
+                        </td>
+                        <td class="small">
+                            {{ phone.battery_capacity }}<br>
+                            {{ phone.battery_type }}<br>
+                            {{ phone.charging_port }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endfor %}

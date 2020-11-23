@@ -1,0 +1,121 @@
+
+.navbar {
+    min-height: 80px;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 80px;
+    line-height: 80px;
+}
+
+.navbar-toggle {
+    margin-top: 23px;
+    padding: 9px 10px !important;
+}
+
+
+.nounderline {
+    text-decoration: none !important;
+    color: black;
+}
+
+.box {
+    margin-top: 70px;
+    position: center;
+}
+
+.brand {
+    width: 100%;
+    padding: 20px;
+}
+
+.image {
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.userprofile {
+    margin-top: 20px;
+}
+
+.navwide {
+    padding: 20px;
+}
+
+#carousel {
+    height: 450px;
+    width: 100%;
+}
+
+#phone_name {
+    color: #4e555b;
+}
+
+
+.phone_image {
+    margin-left: 33%;
+    margin-top: 5%;
+    padding: 5%;
+    image-rendering: high-quality;
+}
+
+#phone_image_home {
+    max-width: 50px;
+    align-self: center;
+    margin-left: 36%;
+    margin-top: 10%;
+    margin-bottom: -5%;
+}
+
+#price {
+    color: orangered;
+}
+
+#details {
+    margin-top: 1%;
+}
+
+.floatingbox {
+    margin-left: -80px;
+    position: absolute;
+    width: auto;
+    height: auto;
+}
+
+.phonehead {
+    padding: 25%;
+    background-color: orangered;
+    border: solid black;
+}
+
+#filter {
+    margin-bottom: 10%;
+}
+
+.overflow-filter {
+    padding: 5px;
+    overflow: scroll;
+    border: 1px solid #ccc;
+    height: 200px;
+}
+
+.filter_img {
+    height: 180px;
+    width: 120px;
+    padding: 10px;
+}
+
+.phone_box {
+    border: 2px solid;
+    color: lightskyblue;
+}
+
+.phone_box:hover {
+    color: red;
+}
+
+.news_box {
+    max-height: 100px;
+    width: auto;
+}

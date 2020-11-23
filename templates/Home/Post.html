@@ -1,0 +1,438 @@
+{% extends 'Base/Base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Details | {{ phone.phone_name }}</title>
+{% endblock title %}
+
+{% block content %}
+    <!-- Page Content -->
+    <div class="container bg-light">
+        <div class="row">
+            <div id="details" class="col-md-12">
+                <hr style="border-top: dotted 1px;"/>
+                <h3 class="brand">{{ phone.phone_name }}
+                    <a target="_blank" class="float-right" style="font-size: small;"
+                       href="{{ phone.company_official_URL }}"> Official website
+                    </a>
+                </h3>
+                <hr style="border-top: dotted 1px;"/>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                {% for img in images %}
+                    {% if forloop.first %}
+                        <div id="zoom_img">
+                            <img class="zoom" id="feature" src="{{ img.image.url }}"
+                                 data-zoom-image="{{ img.image.url }}"
+                                 style="max-height: 320px; margin-top: 20px;">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="row mt-5 border border-dark" align="center">
+                    {% for img in images %}
+                        {% if not forloop.first %}
+                            <img class="thumbnail" src="{{ img.image.url }}" style="max-height: 80px;">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="col-md-8">
+                <div class="mt-4 border border-dark p-2">
+                    <h5>Starting Price
+                        <div class="float-right">&#8377; {{ phone.starting_price }}</div>
+                    </h5>
+                </div>
+
+                <div class="border border-danger p-2 mt-3">
+                    <h4> Buy From Here</h4>
+                    <br>
+                    <h6><img src="{% static 'img/amazon_icon.jpg' %}" style="max-height: 35px;">
+                        <div class="float-right">&#8377; {{ phone.price.amazon_price }}&nbsp;&nbsp;
+                            <a class="btn btn-danger btn-sm text-white">GO TO STORE</a>
+                        </div>
+                    </h6>
+                    <br>
+                    <h6 href="#"><img src="{% static 'img/flipkart_logo.jpg' %}" style="max-height: 35px;">
+                        <div class="float-right">&#8377; {{ phone.price.flipkart_price }}&nbsp;&nbsp;<a
+                                class="btn btn-primary btn-sm text-white">GO TO STORE</a></div>
+                    </h6>
+                </div>
+
+                <div class="table-responsive-md border border-dark p-2 mt-3">
+                    <h5>Key Specifications</h5>
+                    <table width="100%" style="font-family: sans-serif;">
+                        <tbody>
+                        <tr>
+                            <td><strong>Processor</strong> : {{ phone.processor }}</td>
+                            <td><strong>Display</strong> : {{ phone.display_size }} Inch
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>RAM</strong> : {{ phone.RAM_Type }}</td>
+                            <td><strong>Camera</strong> : {{ phone.back_camera_setup }} , {{ phone.front_camera_setup }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Storage Type</strong> : {{ phone.storage_type }}</td>
+                            <td><strong>Battery</strong> : {{ phone.battery_capacity }} mAh {{ phone.battery_type }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        <strong>Product Reviews</strong>
+                    </div>
+                    <div id="review" class="card-body">
+                        <button id="view_more" class="btn btn-outline-secondary float-right">view more</button>
+                        {% for review in reviews %}
+                            <div {% if forloop.counter > 2 %} class="d-none" {% endif %}>
+                                <br><br>
+                                <p>{{ review.review }}</p>
+                                <small class="text-muted">Posted by {{ review.user }}
+                                    on {{ review.publish_date }}</small>
+                                <hr>
+                            </div>
+                        {% endfor %}
+                        <form method="GET" action="{% url 'review' phone.id %}">
+                            {{ form.as_p }}
+                            <button id="review_add" type="submit" class="btn btn-primary">Leave a Review</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="specs" class="col-lg-12">
+            <br>
+            <h5 class="p-3 bg-dark text-danger">{{ phone.phone_name }} Specifications</h5>
+            <table class="table" width="100%" border="1">
+                <tbody>
+                <th colspan="2" class="text-danger bg-dark">Manufacturer Details</th>
+                <tr>
+                    <th scope="row">Company</th>
+                    <td>{{ phone.brand }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Name</th>
+                    <td>{{ phone.phone_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Model Name</th>
+                    <td>{{ phone.model_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Launch Date</th>
+                    <td>{{ phone.launch_date }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Variants</th>
+                    <td>{{ phone.phone_variants }}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">Network Configuration</th>
+                <tr>
+                    <th scope="row">Network Support</th>
+                    <td>{{ phone.network_technology }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">SIM</th>
+                    <td>{{ phone.SIM_Type }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">WI-FI Band</th>
+                    <td>{{ phone.wifi_technology }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Bluetooth</th>
+                    <td>{{ phone.bluetooth }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">GPS</th>
+                    <td>{{ phone.GPS }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">NFC Support</th>
+                    <td>{% if phone.NFC %}{{ 'Yes' }}{% else %}{{ 'Not Available' }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Radio</th>
+                    <td>{% if phone.radio %}{{ 'Yes' }}{% else %}{{ 'Not Available' }}{% endif %}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">Dimensions</th>
+                <tr>
+                    <th scope="row">Dimensions</th>
+                    <td>{{ phone.dimensions }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Weight</th>
+                    <td>{{ phone.weight }} grams</td>
+                </tr>
+                <tr>
+                    <th scope="row">Back Finish</th>
+                    <td>{{ phone.build }}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">Display</th>
+                <tr>
+                    <th scope="row">Display Size</th>
+                    <td>{{ phone.display_size }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Display Type</th>
+                    <td>{{ phone.display_type }} Display</td>
+                </tr>
+                <tr>
+                    <th scope="row">Resolution</th>
+                    <td>{{ phone.display_resolution }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Refresh Rate</th>
+                    <td>{{ phone.display_refresh_rate }} Hz</td>
+                </tr>
+                <tr>
+                    <th scope="row">HDR Support</th>
+                    <td>{% if phone.HDR_support %}{{ 'Yes' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">Main Camera</th>
+                <tr>
+                    <th scope="row">Camera Setup</th>
+                    <td>{{ phone.back_camera_setup }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Resolution</th>
+                    <td>{{ phone.back_camera_resolution }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Features</th>
+                    <td>{{ phone.back_camera_features }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Flash</th>
+                    <td>{% if phone.back_camera_flash %}{{ 'Yes' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Video</th>
+                    <td>{{ phone.back_camera_video_features }}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">Front Camera</th>
+                <tr>
+                    <th scope="row">Camera Setup</th>
+                    <td>{{ phone.front_camera_setup }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Resolution</th>
+                    <td>{{ phone.front_camera_resolution }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Features</th>
+                    <td>{{ phone.front_camera_features }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Flash</th>
+                    <td>{% if phone.front_camera_flash %}{{ 'Yes' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Video</th>
+                    <td>{{ phone.front_camera_video_features }}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">Hardware</th>
+                <tr>
+                    <th scope="row">CPU</th>
+                    <td>{{ phone.processor }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">GPU</th>
+                    <td>{{ phone.gpu }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">RAM Type</th>
+                    <td>{{ phone.RAM_Type }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Storage Expandable</th>
+                    <td>{% if phone.expandable_storage %}{{ 'Yes' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Storage Type</th>
+                    <td>{{ phone.storage_type }} Storage</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">SOFTWARE</th>
+                {% if phone.phone_type == 'Android' %}
+                    <tr>
+                        <th scope="row">Phone UI</th>
+                        <td>{{ phone.UI_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Android Version</th>
+                        <td>{{ phone.android_version }}</td>
+                    </tr>
+                {% elif phone.phone_type == 'iPhone' %}
+                    <tr>
+                        <th scope="row">Phone Software</th>
+                        <td>{{ phone.UI_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">IOS Version</th>
+                        <td>{{ phone.ios_version }}</td>
+                    </tr>
+                {% elif phone.phone_type == 'Feature Phone' %}
+                    <tr>
+                        <th scope="row">Phone Software</th>
+                        <td>{{ phone.UI_name }}</td>
+                    </tr>
+                {% endif %}
+                <th colspan="2" class="text-danger bg-dark">BATTERY</th>
+                <tr>
+                    <th scope="row">Capacity</th>
+                    <td>{{ phone.battery_capacity }} mAh {{ ' ' }}{{ phone.battery_type }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Charger Output</th>
+                    <td>{{ phone.charging_output }} W</td>
+                </tr>
+                <tr>
+                    <th scope="row">Type C</th>
+                    <td>{{ phone.charging_port }} Port</td>
+                </tr>
+                <tr>
+                    <th scope="row">Reverse Charging</th>
+                    <td>{% if phone.reverse_charging %}{{ 'Available' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Wireless Charging</th>
+                    <td>{% if phone.wireless_charging %}{{ 'Available' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">SPEAKER SOUND</th>
+                <tr>
+                    <th scope="row">Loudspeaker</th>
+                    <td>{{ phone.loudspeaker }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Audio Jack</th>
+                    <td>{{ phone.audio_jack }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Audio features</th>
+                    <td>{{ phone.audio_features }}</td>
+                </tr>
+                <th colspan="2" class="text-danger bg-dark">OTHER FEATURES</th>
+                <tr>
+                    <th scope="row">Fingerprint Sensor</th>
+                    <td>{{ phone.fingerprint_sensor }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Face Unlock</th>
+                    <td>{% if phone.face_unlock %}{{ 'Available' }}{% else %}{{ 'No' }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Sensors</th>
+                    <td>{{ phone.other_sensors }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header"><strong>Question And Answers</strong></div>
+                    <div id="questions" class="card-body">
+                        <div id="review" class="card-body">
+                            {% for quesion in questions %}
+                                <p>Question - {{ quesion.question }}</p>
+                                <p>Answer -
+                                    {% if quesion.answer is None %}{{ '' }}{% else %}{{ quesion.answer }}{% endif %}</p>
+                                <small class="text-muted">Posted by {{ quesion.user }}
+                                    on {{ quesion.date_and_time }}</small>
+                                <hr>
+                            {% endfor %}
+
+                            <form method="post" action="{% url 'question' phone.id %}">
+                                {% csrf_token %}
+                                {{ QuestionForm.as_p }}
+                                <button type="submit" class="btn btn-danger">Ask A Question</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="modal fade" id="compareModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+                <!-- Modal content-->
+                <form id="compareForm" method="GET" action="{% url 'comparison' %}">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Compare Phone</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="">Select Phones</span>
+                                </div>
+                                <input type="text" class="phone_compare form-control" value="{{ phone.phone_name }}"
+                                       list="phones" name="first">
+                                <input type="search" class="phone_compare form-control"
+                                       placeholder="Select Other Phone"
+                                       list="phones" name="second">
+                                <button type="submit" class="input-group-append btn btn-success">Compare</button>
+                            </div>
+                            <div class="results" id="result">
+                                {% include 'Home/CompareList.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-xl">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Search Phone</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="phone_search" placeholder="Enter Phone Name..."
+                               autofocus>
+                        <div class="results" id="result">
+                            {% include 'Home/Search.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; SmartphoneWorld.in 2020</p>
+        </div>
+    </footer>
+{% endblock content %}

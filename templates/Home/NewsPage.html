@@ -1,0 +1,35 @@
+{% extends 'Base/Base.html' %}
+
+{% block title %}
+    <title>News | SmartphoneWorld.in</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row mt-5">
+                <h1 style="font-family: 'Times New Roman';">{{ news.title }}</h1>
+                <small class="h-25 w-100">Published - {{ news.datetime }}</small>
+                {% if news.highlights %}
+                    <h3 class="mt-3 mr-auto w-100" style="color: orangered;">HIGHLIGHTS - </h3>
+                    <div class="mt-3" style="list-style: upper-alpha;">
+                        <ul>
+                            {% for highlight in news.overview_lines %}
+                                <li>{{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="row mt-5">
+                <div class="img-fluid">
+                    <img src="{{ news.image.url }}" style="max-height: 250px; position: center;">
+                </div>
+            </div>
+            <div class="row mt-5">
+                <p style="font-family: sans-serif;">{{ news.description }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

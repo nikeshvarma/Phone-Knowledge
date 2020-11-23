@@ -1,0 +1,290 @@
+{% extends 'Base/Base.html' %}
+
+{% block content %}
+
+    <div id="specs" class="col-lg-12">
+
+        <table class="table" width="100%" border="1">
+            <tbody>
+
+            <tr>
+                <th scope="row">Photos</th>
+                <td align="center"><img src="{{ first_phone.home_page_photo.url }}" style="max-height: 120px;"></td>
+                <td align="center"><img src="{{ second_phone.home_page_photo.url }}" style="max-height: 120px;"></td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Manufacturer Details</th>
+            <tr>
+                <th scope="row">Company</th>
+                <td>{{ first_phone.brand }}</td>
+                <td>{{ second_phone.brand }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{ first_phone.phone_name }}</td>
+                <td>{{ second_phone.phone_name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Model Name</th>
+                <td>{{ first_phone.model_name }}</td>
+                <td>{{ second_phone.model_name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Launch Date</th>
+                <td>{{ first_phone.launch_date }}</td>
+                <td>{{ second_phone.launch_date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Variants</th>
+                <td>{{ first_phone.phone_variants }}</td>
+                <td>{{ second_phone.phone_variants }}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Network Configuration</th>
+            <tr>
+                <th scope="row">Network Support</th>
+                <td>{{ first_phone.network_technology }}</td>
+                <td>{{ second_phone.network_technology }}</td>
+            </tr>
+            <tr>
+                <th scope="row">SIM</th>
+                <td>{{ first_phone.SIM_Type }}</td>
+                <td>{{ second_phone.SIM_Type }}</td>
+            </tr>
+            <tr>
+                <th scope="row">WI-FI Band</th>
+                <td>{{ first_phone.wifi_technology }}</td>
+                <td>{{ second_phone.wifi_technology }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Bluetooth</th>
+                <td>{{ first_phone.bluetooth }}</td>
+                <td>{{ second_phone.bluetooth }}</td>
+            </tr>
+            <tr>
+                <th scope="row">GPS</th>
+                <td>{{ first_phone.GPS }}</td>
+                <td>{{ second_phone.GPS }}</td>
+            </tr>
+            <tr>
+                <th scope="row">NFC Support</th>
+                <td>{% if first_phone.NFC %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.NFC %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Radio</th>
+                <td>{% if first_phone.radio %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.radio %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Dimensions</th>
+            <tr>
+                <th scope="row">Dimensions</th>
+                <td>{{ first_phone.dimensions }}</td>
+                <td>{{ second_phone.dimensions }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Weight</th>
+                <td>{{ first_phone.weight }} grams</td>
+                <td>{{ second_phone.weight }} grams</td>
+            </tr>
+            <tr>
+                <th scope="row">Back Finish</th>
+                <td>{{ first_phone.build }}</td>
+                <td>{{ second_phone.build }}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Display</th>
+            <tr>
+                <th scope="row">Display Size</th>
+                <td>{{ first_phone.display_size }}</td>
+                <td>{{ second_phone.display_size }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Display Type</th>
+                <td>{{ first_phone.display_type }} Display</td>
+                <td>{{ second_phone.display_type }} Display</td>
+            </tr>
+            <tr>
+                <th scope="row">Resolution</th>
+                <td>{{ first_phone.display_resolution }}</td>
+                <td>{{ second_phone.display_resolution }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Refresh Rate</th>
+                <td>{{ first_phone.display_refresh_rate }} Hz</td>
+                <td>{{ second_phone.display_refresh_rate }} Hz</td>
+            </tr>
+            <tr>
+                <th scope="row">HDR Support</th>
+                <td>{% if first_phone.HDR_support %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.HDR_support %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Main Camera</th>
+            <tr>
+                <th scope="row">Camera Setup</th>
+                <td>{{ first_phone.back_camera_setup }}</td>
+                <td>{{ second_phone.back_camera_setup }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Resolution</th>
+                <td>{{ first_phone.back_camera_resolution }}</td>
+                <td>{{ second_phone.back_camera_resolution }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Features</th>
+                <td>{{ first_phone.back_camera_features }}</td>
+                <td>{{ second_phone.back_camera_features }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Flash</th>
+                <td>{% if first_phone.back_camera_flash %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.back_camera_flash %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Video</th>
+                <td>{{ first_phone.back_camera_video_features }}</td>
+                <td>{{ second_phone.back_camera_video_features }}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Front Camera</th>
+            <tr>
+                <th scope="row">Camera Setup</th>
+                <td>{{ first_phone.front_camera_setup }}</td>
+                <td>{{ second_phone.front_camera_setup }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Resolution</th>
+                <td>{{ first_phone.front_camera_resolution }}</td>
+                <td>{{ second_phone.front_camera_resolution }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Features</th>
+                <td>{{ first_phone.front_camera_features }}</td>
+                <td>{{ second_phone.front_camera_features }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Flash</th>
+                <td>{% if first_phone.front_camera_flash %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.front_camera_flash %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Video</th>
+                <td>{{ first_phone.front_camera_video_features }}</td>
+                <td>{{ second_phone.front_camera_video_features }}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">Hardware</th>
+            <tr>
+                <th scope="row">CPU</th>
+                <td>{{ first_phone.processor }}</td>
+                <td>{{ second_phone.processor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">GPU</th>
+                <td>{{ first_phone.gpu }}</td>
+                <td>{{ second_phone.gpu }}</td>
+            </tr>
+            <tr>
+                <th scope="row">RAM Type</th>
+                <td>{{ first_phone.RAM_Type }}</td>
+                <td>{{ second_phone.RAM_Type }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Storage Expandable</th>
+                <td>{% if first_phone.expandable_storage %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.expandable_storage %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Storage Type</th>
+                <td>{{ first_phone.storage_type }} Storage</td>
+                <td>{{ second_phone.storage_type }} Storage</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">SOFTWARE</th>
+            {% if first_phone.phone_type == 'Android' %}
+                <tr>
+                    <th scope="row">first_phone UI</th>
+                    <td>{{ first_phone.UI_name }}</td>
+                    <td>{{ second_phone.UI_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Android Version</th>
+                    <td>{{ first_phone.android_version }}</td>
+                    <td>{{ second_phone.android_version }}</td>
+                </tr>
+            {% elif first_phone.phone_type == 'iPhone' %}
+                <tr>
+                    <th scope="row">first_phone Software</th>
+                    <td>{{ first_phone.UI_name }}</td>
+                    <td>{{ second_phone.UI_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">IOS Version</th>
+                    <td>{{ first_phone.ios_version }}</td>
+                    <td>{{ second_phone.ios_version }}</td>
+                </tr>
+            {% elif first_phone.phone_type == 'Feature first_phone' %}
+                <tr>
+                    <th scope="row">first_phone Software</th>
+                    <td>{{ first_phone.UI_name }}</td>
+                    <td>{{ second_phone.UI_name }}</td>
+                </tr>
+            {% endif %}
+            <th colspan="3" class="text-danger bg-dark">BATTERY</th>
+            <tr>
+                <th scope="row">Capacity</th>
+                <td>{{ first_phone.battery_capacity }} mAh {{ ' ' }}{{ first_phone.battery_type }}</td>
+                <td>{{ second_phone.battery_capacity }} mAh {{ ' ' }}{{ first_phone.battery_type }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Charger Output</th>
+                <td>{{ first_phone.charging_output }} W</td>
+                <td>{{ second_phone.charging_output }} W</td>
+            </tr>
+            <tr>
+                <th scope="row">Type C</th>
+                <td>{{ first_phone.charging_port }} Port</td>
+                <td>{{ second_phone.charging_port }} Port</td>
+            </tr>
+            <tr>
+                <th scope="row">Reverse Charging</th>
+                <td>{% if first_phone.reverse_charging %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.reverse_charging %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Wireless Charging</th>
+                <td>{% if first_phone.wireless_charging %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.wireless_charging %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">SPEAKER SOUND</th>
+            <tr>
+                <th scope="row">Loudspeaker</th>
+                <td>{{ first_phone.loudspeaker }}</td>
+                <td>{{ second_phone.loudspeaker }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Audio Jack</th>
+                <td>{{ first_phone.audio_jack }}</td>
+                <td>{{ second_phone.audio_jack }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Audio features</th>
+                <td>{{ first_phone.audio_features }}</td>
+                <td>{{ second_phone.audio_features }}</td>
+            </tr>
+            <th colspan="3" class="text-danger bg-dark">OTHER FEATURES</th>
+            <tr>
+                <th scope="row">Fingerprint Sensor</th>
+                <td>{{ first_phone.fingerprint_sensor }}</td>
+                <td>{{ second_phone.fingerprint_sensor }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Face Unlock</th>
+                <td>{% if first_phone.face_unlock %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+                <td>{% if second_phone.face_unlock %}{{ '✔' }}{% else %}{{ '❌' }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Sensors</th>
+                <td>{{ first_phone.other_sensors }}</td>
+                <td>{{ second_phone.other_sensors }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}

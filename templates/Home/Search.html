@@ -1,0 +1,10 @@
+{% if phones.count > 0 %}
+    <div>
+        <br>
+        {% for phone in phones %}
+            {% if forloop.counter <= 10 %}
+                <a href="{% url 'details_page' phone.id %}">{{ phone.phone_name }}</a><br>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

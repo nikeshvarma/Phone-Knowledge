@@ -1,0 +1,94 @@
+{% extends 'Base/Base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load widget_tweaks %}
+
+{% block title %}
+    <title>Create New Account Here...</title>
+{% endblock title %}
+
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand font-weight-bold" href="{% url 'homepage' %}">
+            <i class="fas fa-phone-square-alt fa-lg"></i> SmartphoneWorld.in
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="{% url 'homepage' %}"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link px-3" href="{% url 'signupuser' %}"><i class="fas fa-user-plus"></i> Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="{% url 'loginuser' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock navbar %}
+
+
+{% block content %}
+
+    {% if messages %}
+        <div class="system-message" align="center">
+            {% for message in messages %}
+                <h6 class="alert alert-danger">{{ message }}</h6>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-6 mx-auto">
+                <div class="card card-signin flex-row my-5">
+                    <div class="card-img-left d-none d-md-flex">
+                        <!-- Background image for card set in CSS! -->
+                    </div>
+                    <div class="card-body">
+                        <h5 class="btn btn-lg btn-danger w-100 text-center">Register</h5>
+                        <form class="form-signin" method="post" action="{% url 'signupuser' %}">
+                            {% csrf_token %}
+                            <div class="form-label-group">
+                                <label>Username</label><br>
+                                {{ forms.username |add_class:"form-control" }}
+                                <div id="check_user" class="form-text text-danger"></div>
+                                <div id="status"></div>
+                                <label>Email address</label><br>
+                                {{ forms.email |add_class:"form-control" }}
+                                <div id="check_email" class="form-text text-danger"></div>
+                                <label>Password</label><br>
+                                {{ forms.password1 }}
+                                <label>Confirm Password</label><br>
+                                {{ forms.password2 }}
+                            </div>
+                            <br>
+                            <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Register
+                            </button>
+                            <a class="d-block text-center mt-2 btn btn-lg btn-primary" href="{% url 'loginuser' %}">Sign
+                                In</a>
+                            <hr class="my-4">
+                            <a class="nounderline btn btn-lg btn-danger btn-block text-uppercase"
+                               href="{% provider_login_url "google" method="oauth2" %}">
+                                <i class="fab fa-google fa-lg"></i> Sign Up with Google
+                            </a>
+                            <br>
+                            <a class="nounderline btn btn-lg btn-primary btn-block text-uppercase"
+                               href="{% provider_login_url "facebook" method="oauth2" %}">
+                                <i class="fab fa-facebook fa-lg"></i>  Sign Up with Facebook
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
